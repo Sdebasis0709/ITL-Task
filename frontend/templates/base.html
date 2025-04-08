@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Task Manager{% endblock %}</title>
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      background: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    nav .nav-links span {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    nav .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 10px;
+      padding: 6px 12px;
+      border: 1px solid white;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Navbar moved here -->
+  <nav>
+    <h1> <a href="{% url 'task-home' %}" style="text-decoration: none; color : #ffffff;">Task Manager 📝</a> </h1>
+    <div class="nav-links">
+      {% if user.is_authenticated %}
+        <span>Hi, {{ user.username }}</span>
+        <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %}
+</body>
+</html>
